@@ -50,3 +50,104 @@ class Solution:
                 ans.append(ans[i-1])
 
         return ans
+
+
+
+"""
+Problem Description
+
+Given an array A of length N, For every index i, you need to find the maximum value in subarray from i to N-1.
+
+"""
+
+class Solution:
+    # @param A : list of integers
+    # @return a list of integers
+    def solve(self, A):
+        n = len(A)
+        ans = [0] * n
+
+        ans[n-1] = A[n-1]
+
+        for i in range(n-2, -1, -1):
+            ans[i] = max(A[i], ans[i+1])
+        
+        return ans
+
+
+
+
+"""
+Problem Description
+
+Imagine a histogram where the bars' heights are given by the array A. Each bar is of uniform width, which is 1 unit. When it rains, water will accumulate in the valleys between the bars.
+
+Your task is to calculate the total amount of water that can be trapped in these valleys.
+"""
+
+class Solution:
+	# @param A : tuple of integers
+	# @return an integer
+	def trap(self, A):
+		n = len(A)
+		if n <= 2:
+			return 0
+
+		# Find right largest array
+		right_largest = [0] * n
+		right_largest[n - 1] = A[n - 1]
+		for i in range(n - 2, -1, -1):
+			right_largest[i] = max(right_largest[i + 1], A[i])
+
+		# Find left largest array
+		left_largest = []
+		left_largest.append(A[0])
+		for i in range(1, n):
+			temp_max = max(left_largest[i - 1], A[i])
+			left_largest.append(temp_max)
+
+		# Calculate trapped water
+		vol = 0
+		for i in range(1, n - 1):
+			vol += min(left_largest[i], right_largest[i]) - A[i]
+
+		return vol
+
+
+
+
+"""
+Problem Description
+
+Imagine a histogram where the bars' heights are given by the array A. Each bar is of uniform width, which is 1 unit. When it rains, water will accumulate in the valleys between the bars.
+
+Your task is to calculate the total amount of water that can be trapped in these valleys.
+"""
+class Solution:
+	# @param A : tuple of integers
+	# @return an integer
+	def trap(self, A):
+		n = len(A)
+		if n <= 2:
+			return 0
+
+		# Find right largest array
+		right_largest = [0] * n
+		right_largest[n - 1] = A[n - 1]
+		for i in range(n - 2, -1, -1):
+			right_largest[i] = max(right_largest[i + 1], A[i])
+
+		# Find left largest array
+		left_largest = []
+		left_largest.append(A[0])
+		for i in range(1, n):
+			temp_max = max(left_largest[i - 1], A[i])
+			left_largest.append(temp_max)
+
+		# Calculate trapped water
+		vol = 0
+		for i in range(1, n - 1):
+			vol += min(left_largest[i], right_largest[i]) - A[i]
+
+		return vol
+
